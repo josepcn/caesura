@@ -1,0 +1,38 @@
+{
+  "manifest_version": 2,
+
+  "name": "Getting started example",
+  "description": "This extension shows a Google Image search result for the current page",
+  "version": "1.0",
+
+  "commands": {
+    "toggle-audio-playback": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+0"
+      },
+      "description": "Toggle audio playback",
+      "global": true
+    }
+  },
+
+  "content_scripts": [
+    {
+      "matches": ["https://*.soundcloud.com/*", "http://*.soundcloud.com/*"],
+      "js": ["soundcloudContentScript.js"]
+    },
+    {
+      "matches": ["http://www.bbc.co.uk/radio/player/*"],
+      "js": ["bbcRadioOneContentScript.js"]
+    }
+  ],
+
+  "background": {
+      "scripts": ["eventPage.js"],
+      "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "https://ajax.googleapis.com/"
+  ]
+}
