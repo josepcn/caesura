@@ -1,9 +1,9 @@
 {
   "manifest_version": 2,
 
-  "name": "Getting started example",
-  "description": "This extension shows a Google Image search result for the current page",
-  "version": "1.0",
+  "name": "Caesura",
+  "description": "Pause music on any tab with a keyboard shortcut",
+  "version": "0.1",
 
   "commands": {
     "toggle-audio-playback": {
