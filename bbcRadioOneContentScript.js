@@ -1,5 +1,7 @@
 
 function swithcAudio(){
+	paused = false
+
 	playButton  = document.getElementById("play")
 	pauseButton = document.getElementById("pause")
 	
@@ -9,14 +11,18 @@ function swithcAudio(){
 		}
 		else if( pauseButton.style.display != "none" ){
 			pauseButton.click()
+			paused = true
 		}
 	}
+
+	return paused
 }
 
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
     	if (request.action == "switchAudio"){
-    		swithcAudio();
+    		paused = swithcAudio()
+    		sendResponse({paused: paused})
     	}
 	});

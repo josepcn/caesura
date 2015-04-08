@@ -22,6 +22,6 @@ function swithcAudio(){
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
     	if (request.action == "switchAudio"){
-    		swithcAudio();
+    		swithcAudio()
     	}
 	});
