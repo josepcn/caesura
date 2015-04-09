@@ -17,31 +17,24 @@ function sendPlayMessageToTab( tabId ){
 	chrome.tabs.sendMessage( tabId, {action: 'playMusic'} )
 }
 
-function sendIsPlayingMessageToTab( tabId ){
-	var responseIsPlaying = false
-	chrome.tabs.sendMessage( tabId, 
-							 {action: 'notifyIsPlaying'},
-							 function(r){
-							 	if( response ){
-									if( response.isPlaying == true ){
-										responseIsPlaying = true
-									}
-								}
-							 })
-	return responseIsPlaying
-}
-
 
 function getTabsPlaying(){
+	var allTabs = []
 	var tabsPlaying = []
 
 	chrome.tabs.query({}, 
-		function(tabs){
+		function (tabs){
     		for (var i = 0; i < tabs.length; i++) {
-				var isPlaying = sendIsPlayingMessageToTab(tabs[i].id)  
-				if( isPlaying ){
-					tabsPlaying.push(tabs[i].id)
-				}              
+    			var tabID = tabs[i].id 
+    			chrome.tabs.sendMessage( tabID, 
+							 {action: 'notifyIsPlaying'},
+							 function (response){
+							 	if( response ){
+									if( response.isPlaying == true ){
+										tabsPlaying.push(tabID)
+									}
+								}
+							 })           
     		}
 		});
 	return tabsPlaying

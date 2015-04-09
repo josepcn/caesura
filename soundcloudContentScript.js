@@ -59,7 +59,7 @@ function pauseMusic(){
 	}
 	return ok
 }
-function notifyIsPlaying(){
+function isMusicPlaying(){
 	var playing = false
 	var playingElements = document.getElementsByClassName(playingClassName);
 	if( playingElements.length == 1 ){
