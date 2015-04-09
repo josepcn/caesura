@@ -1,6 +1,7 @@
 
 function swithcAudio(){
-	// class of the button when its playing
+	paused = false
+
 	notPlayingClassName = "playControl playControls__icon sc-ir"
 	playingClassName = "playControl playControls__icon sc-ir playing"
 	
@@ -14,14 +15,18 @@ function swithcAudio(){
 		var playingElements = document.getElementsByClassName(playingClassName);
 		if( playingElements.length == 1 ){
 			playingElements[0].click()
+			paused = true
 		}
 
 	}
+
+	return paused
 }
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
     	if (request.action == "switchAudio"){
-    		swithcAudio()
+    		paused = swithcAudio()
+    		sendResponse({paused: paused})
     	}
 	});

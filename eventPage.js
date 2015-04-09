@@ -9,6 +9,7 @@ function sendSwitchRequestToAllTabs(){
 };
 
 function registerLastTabThatPausedMusic( tabId ){
+	alert("storing tab" + tabID)
 	chrome.storage.local.set({'lastPauseTabId': tabId})
 }
 
@@ -29,13 +30,16 @@ function sendSwitchRequestToTab( tabId ){
 }
 
 
-
-
-
-
-
 chrome.commands.onCommand.addListener(function(command) {
 	if (command == "toggle-audio-playback") {
+		// found if there is a tab stored that paused the music
+		chrome.storage.local.get('lastPauseTabId', 
+			function(items){
+				tabID = items['lastPauseTabId']
+				//alert("tab id found " + tabID)
+
+			})
+
 		sendSwitchRequestToAllTabs()
     }
 })
