@@ -18,7 +18,7 @@ function sendPlayMessageToTab( tabId ){
 }
 
 function sendIsPlayingMessageToTab( tabId ){
-	responseIsPlaying = false
+	var responseIsPlaying = false
 	chrome.tabs.sendMessage( tabId, 
 							 {action: 'notifyIsPlaying'},
 							 function(r){
@@ -33,12 +33,12 @@ function sendIsPlayingMessageToTab( tabId ){
 
 
 function getTabsPlaying(){
-	tabsPlaying = []
+	var tabsPlaying = []
 
 	chrome.tabs.query({}, 
 		function(tabs){
     		for (var i = 0; i < tabs.length; i++) {
-				isPlaying = sendIsPlayingMessageToTab(tabs[i].id)  
+				var isPlaying = sendIsPlayingMessageToTab(tabs[i].id)  
 				if( isPlaying ){
 					tabsPlaying.push(tabs[i].id)
 				}              
@@ -49,7 +49,7 @@ function getTabsPlaying(){
 
 
 function getLastPausedTabFromStore(){
-	tabID = -1
+	var tabID = -1
 
 	chrome.storage.local.get('lastPauseTabId', 
 			function(items){
@@ -61,19 +61,19 @@ function getLastPausedTabFromStore(){
 
 chrome.commands.onCommand.addListener(function(command) {
 	if (command == "toggle-audio-playback") {
-		tabsPlaying = getTabsPlaying()
+		var tabsPlaying = getTabsPlaying()
 
 		if( tabsPlaying.length > 0 ){
 			// some tabs are playing music, let's pause them
-			for( tabID in tabsPlaying ){
+			for( var tabID in tabsPlaying ){
 				sendPauseMessageToTab(tabID)
 			}
 			// store just one for now
-			chrome.storage.local.set({'lastPauseTabId': tabId})
+			chrome.storage.local.set({'lastPauseTabId': tabsPlaying[0]})
 		}
 		else{
 			// no tabs playing, try to resume 
-			lastTabPausedID = getLastPausedTabFromStore()
+			var lastTabPausedID = getLastPausedTabFromStore()
 			if( lastTabPausedID != -1 ){
 				sendPlayMessageToTab( lastTabPausedID )
 			}
