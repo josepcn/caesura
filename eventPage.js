@@ -1,13 +1,4 @@
 
-/*
-function sendPauseMessageToTab( tabId ){
-	chrome.tabs.sendMessage( tabId, 
-							 {action: 'pauseMusic'},
-							 function(r){
-							 	switchAudioMessageResponseCallback(r, tabId)
-							 })
-}
-*/
 
 function sendPauseMessageToTab( tabId ){
 	chrome.tabs.sendMessage( tabId, {action: 'pauseMusic'} )
@@ -21,7 +12,7 @@ function sendPlayMessageToTab( tabId ){
 function getTabsPlaying(){
 	var allTabs = []
 	var tabsPlaying = []
-
+	
 	chrome.tabs.query({}, 
 		function (tabs){
     		for (var i = 0; i < tabs.length; i++) {

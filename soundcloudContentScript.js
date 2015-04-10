@@ -67,7 +67,7 @@ function isMusicPlaying(){
 	}
 	return playing
 }
-
+/*
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
     	if (request.action == 'notifyIsPlaying'){
@@ -91,3 +91,4 @@ chrome.runtime.onMessage.addListener(
     		sendResponse({couldPause: ok})
     	}
 	});
+*/
