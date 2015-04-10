@@ -1,4 +1,5 @@
 
+/*
 function swithcAudio(){
 	paused = false
 
@@ -27,8 +28,7 @@ chrome.runtime.onMessage.addListener(
     	}
 	});
 
-
-// new stuff
+*/
 
 var playingElementID = "play"
 var pauseElementID = "pause"

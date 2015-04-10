@@ -1,4 +1,5 @@
 
+/*
 function swithcAudio(){
 	var paused = false
 
@@ -31,9 +32,7 @@ chrome.runtime.onMessage.addListener(
     	}
 	});
 
-
-// New stuff
-
+*/
 
 var notPlayingClassName = "playControl playControls__icon sc-ir"
 var playingClassName = "playControl playControls__icon sc-ir playing"
