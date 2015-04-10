@@ -18,11 +18,11 @@
   "content_scripts": [
     {
       "matches": ["https://*.soundcloud.com/*", "http://*.soundcloud.com/*"],
-      "js": ["contentScriptsCommon.js","soundcloudContentScript.js"]
+      "js": ["soundcloudContentScript.js", "contentScriptsCommon.js"]
     },
     {
       "matches": ["http://www.bbc.co.uk/radio/player/*"],
-      "js": ["contentScriptsCommon.js","bbcRadioOneContentScript.js"]
+      "js": ["bbcRadioOneContentScript.js", "contentScriptsCommon.js"]
     }
   ],
 
