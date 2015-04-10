@@ -1,24 +1,26 @@
 
 
+var lastTabPausedStorageKeyName = 'lastPauseTabId'
+
 function sendPauseMessageToTab( tabId ){
-	chrome.tabs.sendMessage( tabId, {action: 'pauseMusic'} )
+	chrome.tabs.sendMessage( tabId, {action: pauseMusicMessageName} )
 }
 
 function sendPlayMessageToTab( tabId ){
-	chrome.tabs.sendMessage( tabId, {action: 'playMusic'} )
+	chrome.tabs.sendMessage( tabId, {action: playMusicMessageName} )
 }
 
 
 function getTabsPlaying(){
 	var allTabs = []
 	var tabsPlaying = []
-	
+
 	chrome.tabs.query({}, 
 		function (tabs){
     		for (var i = 0; i < tabs.length; i++) {
     			var tabID = tabs[i].id 
     			chrome.tabs.sendMessage( tabID, 
-							 {action: 'notifyIsPlaying'},
+							 {action: notifyIsPlayingMessageName},
 							 function (response){
 							 	if( response ){
 									if( response.isPlaying == true ){
@@ -35,9 +37,9 @@ function getTabsPlaying(){
 function getLastPausedTabFromStore(){
 	var tabID = -1
 
-	chrome.storage.local.get('lastPauseTabId', 
+	chrome.storage.local.get(lastTabPausedStorageKeyName, 
 			function(items){
-				tabID = items['lastPauseTabId']
+				tabID = items[lastTabPausedStorageKeyName]
 			})
 
 	return tabID
@@ -53,7 +55,7 @@ chrome.commands.onCommand.addListener(function(command) {
 				sendPauseMessageToTab(tabID)
 			}
 			// store just one for now
-			chrome.storage.local.set({'lastPauseTabId': tabsPlaying[0]})
+			chrome.storage.local.set({lastTabPausedStorageKeyName: tabsPlaying[0]})
 		}
 		else{
 			// no tabs playing, try to resume 
