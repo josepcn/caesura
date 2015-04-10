@@ -2,7 +2,7 @@
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-    	if (request.action == 'notifyIsPlaying'){
+    	if (request.action == notifyIsPlayingMessageName){
     		playing = isMusicPlaying()
     		sendResponse({isPlaying: playing})
     	}
@@ -10,7 +10,7 @@ chrome.runtime.onMessage.addListener(
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-    	if (request.action == 'playMusic'){
+    	if (request.action == playMusicMessageName){
     		ok = play()
     		sendResponse({couldPlay: ok})
     	}
@@ -18,7 +18,7 @@ chrome.runtime.onMessage.addListener(
 
 chrome.runtime.onMessage.addListener(
 	function(request, sender, sendResponse) {
-    	if (request.action == 'pauseMusic'){
+    	if (request.action == pauseMusicMessageName){
     		ok = pause()
     		sendResponse({couldPause: ok})
     	}
