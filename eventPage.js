@@ -71,7 +71,7 @@ function disconnectAllPorts(){
 	for (var tabID in global_PortByTabID) {
     	var port = myDictionary[tabID];
     	port.disconnect()
-    	// Use `key` and `value`
+    
 	}
 }
 
@@ -96,13 +96,13 @@ function responseReceived( tabID, numTabs, port, msg ){
 			chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
 				if( 'lastPauseTabId' in result ){
 					var lastPauseTabId = result[lastTabPausedStorageKeyName]
-					//console.log("retrieved tab id, sending play " + lastPauseTabId )
+					console.log("retrieved tab id, sending play " + lastPauseTabId )
 					global_PortByTabID[lastPauseTabId].postMessage({action: playMusicMessageName});
 				}
 			})	
 		}
 
-		disconnectAllPorts()
+		//disconnectAllPorts()
 	}
 
 }
