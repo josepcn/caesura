@@ -49,6 +49,7 @@ function getLastPausedTabFromStore(){
 }
 
 
+
 function allTabsResponses( tabsPlaying ){
 	//chrome.storage.local.set({lastTabPausedStorageKeyName: tabID})
 						
@@ -64,6 +65,15 @@ function allTabsResponses( tabsPlaying ){
 var global_NumResponses = 0
 var global_NumTabsPlaying = 0
 var global_PortByTabID = {}
+
+
+function disconnectAllPorts(){
+	for (var tabID in global_PortByTabID) {
+    	var port = myDictionary[tabID];
+    	port.disconnect()
+    	// Use `key` and `value`
+	}
+}
 
 function responseReceived( tabID, numTabs, port, msg ){
 	global_NumResponses = global_NumResponses + 1
@@ -91,6 +101,8 @@ function responseReceived( tabID, numTabs, port, msg ){
 				}
 			})	
 		}
+
+		disconnectAllPorts()
 	}
 
 }
