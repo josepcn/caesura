@@ -61,35 +61,64 @@ function allTabsResponses( tabsPlaying ){
 	}
 }
 
-var ports = {}
+var global_NumResponses = 0
+var global_NumTabsPlaying = 0
+
+function responseReceived( tabID, numTabs, port, msg ){
+	global_NumResponses = global_NumResponses + 1
+
+	if( msg ){
+		if( msg.isPlaying ){
+			console.log("tab playing, sending pause")
+			port.postMessage({action: pauseMusicMessageName})
+			global_NumTabsPlaying = global_NumTabsPlaying + 1
+			chrome.storage.local.set({lastTabPausedStorageKeyName: tabID})
+		}
+	}
+
+	if( global_NumResponses == numTabs ){
+		// last response
+		console.log( "there were " +  global_NumTabsPlaying + " tabs playing") 
+		if( global_NumTabsPlaying == 0 ){
+			console.log("non playing. should resume last paused")
+			chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
+				var lastPauseTabId = result[lastTabPausedStorageKeyName]
+				console.log("retrieved tab id, sending play" + lastPauseTabId )
+				port.postMessage({action: playMusicMessageName});
+			})	
+		}
+	}
+
+}
+function communicateWithTab( tabID, numTabs ){
+
+	var tabsPlaying = []
+	var numTabsPlaying = 0
+
+	var port = chrome.tabs.connect(tabID)
+
+	port.onMessage.addListener( function(msg) {
+    	responseReceived( tabID, numTabs, port, msg )
+	})
+	port.onDisconnect.addListener(function() { // tabs that are not connected call disconnect
+    	responseReceived( tabID, numTabs, port, null )
+	})
+
+	port.postMessage({action: notifyIsPlayingMessageName});
+}
 
 function toogleAudioOnTabs(tabs){
 	
-	ports = {}
-
-	var numResponses = 0
-	var tabsPlaying = []
+	global_NumResponses = 0
+	global_NumTabsPlaying = 0
 
 	for (var i = 0; i < tabs.length; i++) {
 		var tabID = tabs[i].id 
 
-		ports[tabID] = chrome.tabs.connect(tabID,{name: ""});
+		communicateWithTab(tabID, tabs.length);
 		
-		ports[tabID].onDisconnect.addListener(function() {
-        	console.log("port disconected")
-    	})
 
-    	ports[tabID].onMessage.addListener( function(msg) {
-    		if( msg ){
-	    		if( msg.isPlaying ){
-	    			console.log("is playing " + msg.isPlaying)
-	    			console.log("tab playing, sending pause")
-	    			ports[tabID].postMessage({action: pauseMusicMessageName})
-	    		}
-	    	}
-    	})
-
-    	ports[tabID].postMessage({action: notifyIsPlayingMessageName});
+    	//ports[tabID].postMessage({action: notifyIsPlayingMessageName});
 	}        
     
 
@@ -126,6 +155,7 @@ function toogleAudioOnTabs(tabs){
 chrome.commands.onCommand.addListener(function(command) {
 	if (command == "toggle-audio-playback") {
 
+		ports = {}
 		chrome.tabs.query({}, toogleAudioOnTabs)
 
 		/*
