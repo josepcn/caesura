@@ -63,38 +63,38 @@ function allTabsResponses( tabsPlaying ){
 
 var global_NumResponses = 0
 var global_NumTabsPlaying = 0
+var global_PortByTabID = {}
 
 function responseReceived( tabID, numTabs, port, msg ){
 	global_NumResponses = global_NumResponses + 1
 
 	if( msg ){
 		if( msg.isPlaying ){
-			console.log("tab playing, sending pause")
 			port.postMessage({action: pauseMusicMessageName})
 			global_NumTabsPlaying = global_NumTabsPlaying + 1
-			chrome.storage.local.set({lastTabPausedStorageKeyName: tabID})
+			var obj = {}
+			obj[lastTabPausedStorageKeyName] = tabID
+			chrome.storage.local.set(obj)
+			console.log("sent pause, storing tab. ID: " + tabID )
 		}
 	}
 
-	if( global_NumResponses == numTabs ){
+	if( global_NumResponses === numTabs ){
 		// last response
-		console.log( "there were " +  global_NumTabsPlaying + " tabs playing") 
 		if( global_NumTabsPlaying == 0 ){
-			console.log("non playing. should resume last paused")
+			//console.log("non playing. should resume last paused")
 			chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
-				var lastPauseTabId = result[lastTabPausedStorageKeyName]
-				console.log("retrieved tab id, sending play" + lastPauseTabId )
-				port.postMessage({action: playMusicMessageName});
+				if( 'lastPauseTabId' in result ){
+					var lastPauseTabId = result[lastTabPausedStorageKeyName]
+					//console.log("retrieved tab id, sending play " + lastPauseTabId )
+					global_PortByTabID[lastPauseTabId].postMessage({action: playMusicMessageName});
+				}
 			})	
 		}
 	}
 
 }
 function communicateWithTab( tabID, numTabs ){
-
-	var tabsPlaying = []
-	var numTabsPlaying = 0
-
 	var port = chrome.tabs.connect(tabID)
 
 	port.onMessage.addListener( function(msg) {
@@ -104,6 +104,7 @@ function communicateWithTab( tabID, numTabs ){
     	responseReceived( tabID, numTabs, port, null )
 	})
 
+	global_PortByTabID[tabID] = port
 	port.postMessage({action: notifyIsPlayingMessageName});
 }
 
@@ -111,14 +112,10 @@ function toogleAudioOnTabs(tabs){
 	
 	global_NumResponses = 0
 	global_NumTabsPlaying = 0
+	global_PortByTabID = {}
 
 	for (var i = 0; i < tabs.length; i++) {
-		var tabID = tabs[i].id 
-
-		communicateWithTab(tabID, tabs.length);
-		
-
-    	//ports[tabID].postMessage({action: notifyIsPlayingMessageName});
+		communicateWithTab(tabs[i].id, tabs.length);
 	}        
     
 

@@ -27,7 +27,7 @@ function isMusicPlaying(){
 	var playing = false
 
 	var playButton = document.getElementById(playingElementID)
-	if( playButton.style.display != "none" ){
+	if( playButton.style.display == "none" ){
 		playing = true
 	}
 
