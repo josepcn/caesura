@@ -34,7 +34,7 @@
     },
     {
       "matches": ["https://play.google.com/music/*", "http://play.google.com/music/*"],
-      "js": ["common.js", "classChangeBasedContentScript.js", "googleAudioContentScript.js", "contentScriptsCommon.js"]
+      "js": ["common.js", "googleAudioContentScript.js", "contentScriptsCommon.js"]
     }
 
   ],
