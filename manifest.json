@@ -31,7 +31,13 @@
     {
       "matches": ["http://www.deezer.com/*"],
       "js": ["common.js","deezerContentScript.js", "contentScriptsCommon.js"]
+    },
+    {
+      "matches": ["http://www.rdio.com/*"],
+      "js": ["common.js","rdioContentScript.js", "contentScriptsCommon.js"]
     }
+
+    
 
     
   ],
