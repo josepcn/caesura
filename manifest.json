@@ -26,8 +26,14 @@
     },
     {
       "matches": ["http://www.bbc.co.uk/radio/player/*"],
+      "js": ["common.js","bbcRadioOnePopupContentScript.js", "contentScriptsCommon.js"]
+    },
+    {
+      "matches": ["http://www.bbc.co.uk/programmes/*"],
       "js": ["common.js","bbcRadioOneContentScript.js", "contentScriptsCommon.js"]
     }
+
+    
   ],
 
   "background": {
