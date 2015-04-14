@@ -17,29 +17,22 @@
 
   "content_scripts": [
     {
-      "matches": ["file://*"],
-      "js": ["common.js","bareContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["https://*.soundcloud.com/*", "http://*.soundcloud.com/*"],
-      "js": ["common.js","soundcloudContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
       "matches": ["http://www.bbc.co.uk/radio/player/*"],
       "js": ["common.js","bbcRadioOnePopupContentScript.js", "contentScriptsCommon.js"]
     },
     {
+      "matches": ["https://*.soundcloud.com/*", "http://*.soundcloud.com/*"],
+      "js": ["common.js", "classChangeBasedContentScript.js", "soundcloudContentScript.js", "contentScriptsCommon.js"]
+    },
+    {
       "matches": ["http://www.deezer.com/*"],
-      "js": ["common.js","deezerContentScript.js", "contentScriptsCommon.js"]
+      "js": ["common.js", "classChangeBasedContentScript.js", "deezerContentScript.js", "contentScriptsCommon.js"]
     },
     {
       "matches": ["http://www.rdio.com/*"],
-      "js": ["common.js","rdioContentScript.js", "contentScriptsCommon.js"]
+      "js": ["common.js", "classChangeBasedContentScript.js", "rdioContentScript.js", "contentScriptsCommon.js"]
     }
 
-    
-
-    
   ],
 
   "background": {
