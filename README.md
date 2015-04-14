@@ -7,5 +7,8 @@ Since Chrome allows for global keyboard shortcuts, the music can be paused and p
 
 Supported services:
 - Soundcloud
-- BBC Radio 1 (pop-up window)
+- Rdio
 - Deezer
+- BBC Radio 1 (pop-up window)
+
+
