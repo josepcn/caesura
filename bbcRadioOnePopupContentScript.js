@@ -9,6 +9,7 @@ function playMusic(){
 
 	if( playButton ){
 		playButton.click()
+		ok = true
 	}
 	return ok
 }
@@ -20,6 +21,7 @@ function pauseMusic(){
 
 	if( pauseButton ){
 		pauseButton.click()
+		ok = true
 	}
 	return ok
 }

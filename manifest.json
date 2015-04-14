@@ -31,6 +31,10 @@
     {
       "matches": ["http://www.rdio.com/*"],
       "js": ["common.js", "classChangeBasedContentScript.js", "rdioContentScript.js", "contentScriptsCommon.js"]
+    },
+    {
+      "matches": ["https://play.google.com/music/*", "http://play.google.com/music/*"],
+      "js": ["common.js", "classChangeBasedContentScript.js", "googleAudioContentScript.js", "contentScriptsCommon.js"]
     }
 
   ],
