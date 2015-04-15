@@ -1,8 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "Caesura",
-  "description": "Pause music on any tab with a keyboard shortcut",
+  "name": "caesura",
+  "description": "Pause and play music from the best streaming services with a keyboard shortcut",
   "version": "0.1",
 
   "commands": {
@@ -36,15 +36,18 @@
       "matches": ["https://play.google.com/music/*", "http://play.google.com/music/*"],
       "js": ["common.js", "googleAudioContentScript.js", "contentScriptsCommon.js"]
     }
-
   ],
+
+  "icons": { 
+             "48": "artwork/icon_48.png",
+            "128": "artwork/icon_128.png" 
+  },
 
   "background": {
       "scripts": ["common.js","eventPage.js"],
       "persistent": false
   },
   "permissions": [
-    "activeTab",
     "tabs",
     "storage"
   ]
