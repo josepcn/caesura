@@ -8,3 +8,7 @@ deploy/caesura.crx
 deploy/caesura.pem
 
 *.zip
+
+artwork/icon_128.png
+
+artwork/icon_48.png
