@@ -2,3 +2,7 @@
 *.pxm
 
 artwork/snapshot.png
+
+deploy/caesura.crx
+
+deploy/caesura.pem
