@@ -1,7 +1,8 @@
 {
   "manifest_version": 2,
 
-  "name": "caesura",
+  "name": "Music Pause/Resume",
+  "short_name": "caesura",
   "description": "Pause and play music from the best streaming services with a keyboard shortcut",
   "version": "0.1",
 
