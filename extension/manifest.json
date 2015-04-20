@@ -4,7 +4,7 @@
   "name": "Music Pause/Resume",
   "short_name": "caesura",
   "description": "Pause and resume streaming music with a keyboard shortcut",
-  "version": "0.1",
+  "version": "0.1.2",
 
   "commands": {
     "toggle-audio-playback": {
@@ -40,8 +40,7 @@
   ],
 
   "icons": { 
-             "48": "icons/icon_48.png",
-            "128": "icons/icon_128.png" 
+            "128": "icons/icon_key_128.png" 
   },
 
   "background": {
