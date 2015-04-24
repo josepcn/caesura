@@ -1,0 +1,21 @@
+ [
+	{
+		"name" : "bbc_radio_popup",
+		"url" : "bbc.co.uk/radio/player",
+		"type" : "two_elements_state_style",
+		"elementNames" : {
+			"play"  : "play",
+			"pause" : "pause"
+		} 
+	},
+	{
+		"name" : "soundcloud",
+		"url" : "soundcloud",
+		"type" : "class_change",
+		"classNames" : {
+			"paused"  : "playControl playControls__icon sc-ir",
+			"playing" : "playControl playControls__icon sc-ir playing"
+		}
+
+	}
+]
