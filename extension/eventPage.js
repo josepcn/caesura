@@ -53,6 +53,24 @@
 		return res
 	}
 
+	function requestPlayToStoredTab( info ){
+
+		chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
+			if( lastTabPausedStorageKeyName in result ){
+				var lastPauseTabId = result[lastTabPausedStorageKeyName]
+				var messageObj = {action: playMusicMessageName, 
+				  		  info: info }
+
+				var storedPort = global_PortByTabID[lastPauseTabId]
+				if( storedPort ){
+					storedPort.postMessage(messageObj)
+				}
+				else{
+					console.log("port for tab not found")
+				}
+			}
+		})	
+	}
 
 	function responseReceived( tabID, numTabs, info, port, msg ){
 		global_NumResponses = global_NumResponses + 1
@@ -73,21 +91,9 @@
 		if( global_NumResponses === numTabs ){
 			// last response
 			if( global_NumTabsPlaying == 0 ){
-				chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
-					if( lastTabPausedStorageKeyName in result ){
-						var lastPauseTabId = result[lastTabPausedStorageKeyName]
-						var messageObj = {action: playMusicMessageName, 
-						  		  info: info }
-
-						var storedPort = global_PortByTabID[lastPauseTabId]
-						if( storedPort ){
-							storedPort.postMessage(messageObj)
-						}
-						else{
-							console.log("port for tab not found")
-						}
-					}
-				})	
+				// no tabs playing, request play to the tab stored
+				requestPlayToStoredTab( info )
+				
 			}
 		}
 
@@ -95,6 +101,7 @@
 
 	function communicateWithTab( tabID, info, numTabs ){
 		var port = chrome.tabs.connect( parseInt(tabID) )
+		global_PortByTabID[tabID] = port
 
 		port.onMessage.addListener( function(msg) {
 	    	responseReceived( tabID, numTabs, info, port, msg )
@@ -103,7 +110,7 @@
 	    	responseReceived( tabID, numTabs, info, port, null )
 		})
 
-		global_PortByTabID[tabID] = port
+		
 		var messageObj = {action: notifyIsPlayingMessageName, 
 						  info: info }
 		port.postMessage( messageObj );

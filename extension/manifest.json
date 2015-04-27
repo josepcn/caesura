@@ -19,7 +19,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["baseContentScript.js"]
+      "js": ["common.js","baseContentScript.js"]
     }
   ],
 
