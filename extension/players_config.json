@@ -25,5 +25,14 @@
 			"paused" : "control control-play",
 			"playing" : "control control-pause"
 		}
+	},
+	{
+		"name" : "mixcloud",
+		"url" : "mixcloud",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "player-control",
+			"playing" : "player-control pause-state"
+		}
 	}
 ]
