@@ -43,5 +43,15 @@
 			"paused" : "play_pause",
 			"playing" : "play_pause playing"
 		}
+	},
+	{
+		"name" : "googlemusic",
+		"url" : "play.google.com/music",
+		"type" : "class_change_selector_att",
+		"selectorAtt" : "[data-id='play-pause']",
+		"classNames" : {
+			"paused" : "flat-button",
+			"playing" : "flat-button playing"
+		}
 	}
 ]
