@@ -34,5 +34,14 @@
 			"paused" : "player-control",
 			"playing" : "player-control pause-state"
 		}
+	},
+	{
+		"name" : "rdio",
+		"url" : "rdio",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "play_pause",
+			"playing" : "play_pause playing"
+		}
 	}
 ]
