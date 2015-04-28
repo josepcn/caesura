@@ -53,21 +53,28 @@
 		return res
 	}
 
-	function requestPlayToStoredTab( info ){
+	function requestPlayToStoredTab(){
 
 		chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
 			if( lastTabPausedStorageKeyName in result ){
-				var lastPauseTabId = result[lastTabPausedStorageKeyName]
-				var messageObj = {action: playMusicMessageName, 
-				  		  info: info }
+				var lastPauseTabIdStr = result[lastTabPausedStorageKeyName]
+				var lastPauseTabId = parseInt(lastPauseTabIdStr)
 
-				var storedPort = global_PortByTabID[lastPauseTabId]
-				if( storedPort ){
-					storedPort.postMessage(messageObj)
-				}
-				else{
-					console.log("port for tab not found")
-				}
+				chrome.tabs.get(lastPauseTabId, function( tab ){
+
+					var info = getSupportedServiceInfo( tab.url )
+					var messageObj = {action: playMusicMessageName, 
+					  		  info: info }
+
+					var storedPort = global_PortByTabID[lastPauseTabId]
+					if( storedPort ){
+						storedPort.postMessage(messageObj)
+					}
+					else{
+						console.log("port for tab not found")
+					}
+				})
+				
 			}
 		})	
 	}
@@ -92,7 +99,7 @@
 			// last response
 			if( global_NumTabsPlaying == 0 ){
 				// no tabs playing, request play to the tab stored
-				requestPlayToStoredTab( info )
+				requestPlayToStoredTab()
 				
 			}
 		}
