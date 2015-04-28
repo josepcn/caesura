@@ -16,6 +16,14 @@
 			"paused"  : "playControl playControls__icon sc-ir",
 			"playing" : "playControl playControls__icon sc-ir playing"
 		}
-
+	},
+	{
+		"name" : "deezer",
+		"url" : "deezer",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "control control-play",
+			"playing" : "control control-pause"
+		}
 	}
 ]
