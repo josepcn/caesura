@@ -53,6 +53,44 @@
   }
 
 
+  //-- ClassChangeSelectorBasedController --//
+  function ClassChangeSelectorBasedController( _playPauseDataIDAtt, _playingClassName, _pausedClassName) {
+    this.playPauseDataIDAtt = _playPauseDataIDAtt
+    this.playingClassName = _playingClassName
+    this.pausedClassName  = _pausedClassName
+  }
+  ClassChangeSelectorBasedController.prototype = Object.create(ControllerBase.prototype);
+  ClassChangeSelectorBasedController.prototype.playMusic = function() {
+    var ok = false
+    var playPauseButton = document.querySelector(this.playPauseDataIDAtt);
+
+    if( playPauseButton ){
+      playPauseButton.click()
+      ok = true
+    }
+    return ok
+  }
+  ClassChangeSelectorBasedController.prototype.pauseMusic = function() {
+    var ok = false
+    var playPauseButton = document.querySelector(this.playPauseDataIDAtt);
+
+    if( playPauseButton ){
+      playPauseButton.click()
+    }
+    return ok
+  }
+  ClassChangeSelectorBasedController.prototype.isMusicPlaying = function() {
+    var playing = false
+    var playPauseButton = document.querySelector(this.playPauseDataIDAtt);
+
+    if( playPauseButton ){
+      if( playPauseButton.className == this.playingClassName ){
+        playing = true
+      }
+    }
+    return playing
+  }
+
   //-- TwoElementsStateStyleController --//
   function ElementsStateStyleController(_playingElementID, _pausedElementID) {
     this.playingElementID = _playingElementID
@@ -98,6 +136,12 @@
     else if( info.type == "two_elements_state_style" ){
       return new ElementsStateStyleController( info.elementNames.play,
                                                info.elementNames.pause )
+    }
+    else if( info.type == "class_change_selector_att" ){
+      return new ClassChangeSelectorBasedController( info.selectorAtt,
+                                                     info.classNames.playing, 
+                                                     info.classNames.paused )
+
     }
   }
 
