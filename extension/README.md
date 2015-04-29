@@ -11,5 +11,6 @@ Supported services:
 - Deezer
 - Google Pay Music
 - BBC Radio 1 (pop-up window)
+- Mixcloud
 
 
