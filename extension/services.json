@@ -1,0 +1,57 @@
+ [
+	{
+		"name" : "bbc_radio_popup",
+		"url" : "bbc.co.uk/radio/player",
+		"type" : "two_elements_state_style",
+		"elementNames" : {
+			"play"  : "play",
+			"pause" : "pause"
+		} 
+	},
+	{
+		"name" : "soundcloud",
+		"url" : "soundcloud",
+		"type" : "class_change",
+		"classNames" : {
+			"paused"  : "playControl playControls__icon sc-ir",
+			"playing" : "playControl playControls__icon sc-ir playing"
+		}
+	},
+	{
+		"name" : "deezer",
+		"url" : "deezer",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "control control-play",
+			"playing" : "control control-pause"
+		}
+	},
+	{
+		"name" : "mixcloud",
+		"url" : "mixcloud",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "player-control",
+			"playing" : "player-control pause-state"
+		}
+	},
+	{
+		"name" : "rdio",
+		"url" : "rdio",
+		"type" : "class_change",
+		"classNames" : {
+			"paused" : "play_pause",
+			"playing" : "play_pause playing"
+		}
+	},
+	{
+		"name" : "googlemusic",
+		"url" : "play.google.com/music",
+		"type" : "class_change_selector_att",
+		"selectorAtt" : "[data-id='play-pause']",
+		"classNames" : {
+			"paused" : "flat-button",
+			"playing" : "flat-button playing"
+		}
+	}
+]

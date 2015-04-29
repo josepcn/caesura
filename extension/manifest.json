@@ -18,28 +18,8 @@
 
   "content_scripts": [
     {
-      "matches": ["http://www.bbc.co.uk/radio/player/*"],
-      "js": ["common.js","bbcRadioOnePopupContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["https://*.soundcloud.com/*", "http://*.soundcloud.com/*"],
-      "js": ["common.js", "classChangeBasedContentScript.js", "soundcloudContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["http://www.deezer.com/*"],
-      "js": ["common.js", "classChangeBasedContentScript.js", "deezerContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["http://www.rdio.com/*"],
-      "js": ["common.js", "classChangeBasedContentScript.js", "rdioContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["https://play.google.com/music/*", "http://play.google.com/music/*"],
-      "js": ["common.js", "googleAudioContentScript.js", "contentScriptsCommon.js"]
-    },
-    {
-      "matches": ["https://www.mixcloud.com/*", "https://www.mixcloud.com/*"],
-      "js": ["common.js", "classChangeBasedContentScript.js", "mixcloudContentScript.js", "contentScriptsCommon.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["common.js","contentScript.js"]
     }
   ],
 
@@ -48,7 +28,7 @@
   },
 
   "background": {
-      "scripts": ["common.js","eventPage.js"],
+      "scripts": ["common.js", "eventPage.js"],
       "persistent": false
   },
   "permissions": [
