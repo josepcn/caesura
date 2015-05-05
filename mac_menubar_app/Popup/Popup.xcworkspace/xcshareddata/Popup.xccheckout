@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>308F70BE-EAB5-4BA4-9DB5-AC3AE87D033B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Popup</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</key>
+		<string>https://github.com/josepcn/caesura.git</string>
+		<key>C46AA6D8BE61BA4FE33F4E519917EC296B54830C</key>
+		<string>https://github.com/shpakovski/Popup</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Popup.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</key>
+		<string>../../..</string>
+		<key>C46AA6D8BE61BA4FE33F4E519917EC296B54830C</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/shpakovski/Popup</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>C46AA6D8BE61BA4FE33F4E519917EC296B54830C</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>..</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>C46AA6D8BE61BA4FE33F4E519917EC296B54830C</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Popup</string>
+		</dict>
+	</array>
+</dict>
+</plist>
