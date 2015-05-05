@@ -1,0 +1,3 @@
+[submodule "mac_menubar_app/CocoaHTTPServer"]
+	path = mac_menubar_app/CocoaHTTPServer
+	url = https://github.com/robbiehanson/CocoaHTTPServer
