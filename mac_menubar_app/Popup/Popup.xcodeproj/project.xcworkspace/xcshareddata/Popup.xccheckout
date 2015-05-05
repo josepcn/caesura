@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>70C08154-DEDE-4245-A0C3-D15858A045E1</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Popup</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</key>
+		<string>https://github.com/josepcn/caesura.git</string>
+		<key>71CFC0DE1DEFC877B0C5B9F98B971EBA2921D608</key>
+		<string>https://github.com/robbiehanson/CocoaHTTPServer</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>mac_menubar_app/Popup/Popup.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</key>
+		<string>../../../..</string>
+		<key>71CFC0DE1DEFC877B0C5B9F98B971EBA2921D608</key>
+		<string>../../../..mac_menubar_app/CocoaHTTPServer/</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/josepcn/caesura.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>71CFC0DE1DEFC877B0C5B9F98B971EBA2921D608</string>
+			<key>IDESourceControlWCCName</key>
+			<string>CocoaHTTPServer</string>
+		</dict>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>52351BC046A994A1D2B10AF7E8EC915AC0D373F6</string>
+			<key>IDESourceControlWCCName</key>
+			<string>project</string>
+		</dict>
+	</array>
+</dict>
+</plist>

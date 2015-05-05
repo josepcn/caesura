@@ -1,4 +1,6 @@
 #import "ApplicationDelegate.h"
+#import "HTTPServer.h"
+#import "Connection.h"
 
 @implementation ApplicationDelegate
 
@@ -32,6 +34,19 @@ void *kContextActivePanel = &kContextActivePanel;
 {
     // Install icon into the menu bar
     self.menubarController = [[MenubarController alloc] init];
+    
+    // start http server
+
+    HTTPServer * httpServer = [[HTTPServer alloc] init];
+    [httpServer setPort:12345]; // TODO: use zeroconf
+    [httpServer setConnectionClass:[Connection class]];
+    
+    NSError *error = nil;
+    if(![httpServer start:&error])
+    {
+        NSLog(@"Error starting HTTP Server: %@", error);
+    }
+
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
