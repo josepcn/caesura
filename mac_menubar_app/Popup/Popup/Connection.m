@@ -27,10 +27,10 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE | HTTP_LOG_FLAG_TRACE;
         
         HTTPLogVerbose(@"Have been polled");
         
-        return [[HTTPCaesuraResponse alloc] init];
+        return [[HTTPCaesuraResponse alloc] initWithStatus:(200)];
     }
     
-    return [super httpResponseForMethod:method URI:path];
+    return [[HTTPCaesuraResponse alloc] initWithStatus:(404)];
 }
 
 

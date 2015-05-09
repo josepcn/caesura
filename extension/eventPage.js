@@ -1,5 +1,6 @@
 
 
+// Config loader
 (function(w){
 
 	w.caesura_sitesInfoByName = {}
@@ -155,11 +156,29 @@
 
 	}
 
+
+	// Install key command (from keys)
 	chrome.commands.onCommand.addListener(function(command) {
 		if (command == "toggle-audio-playback") {
 			chrome.tabs.query({}, toogleAudioOnTabs)
 	    }
-	})
+	});
+
+
+	// pull server request
+	(function(){
+		var port = "55198"
+		var xhr = new XMLHttpRequest()
+		xhr.open("GET", "http://127.0.0.1:" + port + "/query/", true)
+		xhr.onreadystatechange = function() {
+		  if (xhr.readyState == 4) {
+		  	alert("got response from menu bar app")
+		  }
+		}
+		xhr.send();
+	})();
+
+
 
 
 })(window);
