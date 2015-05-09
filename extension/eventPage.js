@@ -15,7 +15,7 @@
 		 	}
 		}
 	}
-	xhr.open("GET", chrome.extension.getURL('/players_config.json'), true);
+	xhr.open("GET", chrome.extension.getURL('/services.json'), true);
 	xhr.send();
 
 
