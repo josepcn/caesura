@@ -22,3 +22,7 @@ artwork/icon_48.png
 .DS_Store
 
 .DS_Store
+
+*.xcuserstate
+
+*.xcuserstate
