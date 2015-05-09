@@ -1,6 +1,10 @@
 #import "ApplicationDelegate.h"
-#import "HTTPServer.h"
 #import "Connection.h"
+#import "DDLog.h"
+#import "DDTTYLogger.h"
+#import "MyHTTPConnection.h"
+
+static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation ApplicationDelegate
 
@@ -36,15 +40,21 @@ void *kContextActivePanel = &kContextActivePanel;
     self.menubarController = [[MenubarController alloc] init];
     
     // start http server
-
-    HTTPServer * httpServer = [[HTTPServer alloc] init];
-    [httpServer setPort:12345]; // TODO: use zeroconf
+    [DDLog addLogger:[DDTTYLogger sharedInstance]];
+    
+    httpServer = [[HTTPServer alloc] init];
+    //[httpServer setInterface:@"localhost"];
+    
+    //[httpServer setPort:12345]; // TODO: use zeroconf
     [httpServer setConnectionClass:[Connection class]];
     
     NSError *error = nil;
     if(![httpServer start:&error])
     {
         NSLog(@"Error starting HTTP Server: %@", error);
+    }
+    else{
+        NSLog(@"port %i", [httpServer listeningPort]);
     }
 
 }

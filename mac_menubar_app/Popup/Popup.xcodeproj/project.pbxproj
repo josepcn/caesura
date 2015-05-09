@@ -30,6 +30,8 @@
 		7242E1EA1AF96F3500C40535 /* DDTTYLogger.m in Sources */ = {isa = PBXBuildFile; fileRef = 7242E1E51AF96F3500C40535 /* DDTTYLogger.m */; };
 		7242E1EC1AF96FFD00C40535 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7242E1EB1AF96FFD00C40535 /* CFNetwork.framework */; };
 		7242E1EE1AF9703000C40535 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7242E1ED1AF9703000C40535 /* Security.framework */; };
+		7242E1F01AFA879700C40535 /* HTTPCaesuraResponse.m in Sources */ = {isa = PBXBuildFile; fileRef = 7242E1EF1AFA879700C40535 /* HTTPCaesuraResponse.m */; };
+		7242E1F41AFBE18B00C40535 /* MyHTTPConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 7242E1F31AFBE18B00C40535 /* MyHTTPConnection.m */; };
 		DD4F7C0913C30F9F00825C6E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4F7C0813C30F9F00825C6E /* Cocoa.framework */; };
 		DD4F7C1513C30F9F00825C6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C1413C30F9F00825C6E /* main.m */; };
 		DD4F7C1C13C30F9F00825C6E /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.m */; };
@@ -93,6 +95,10 @@
 		7242E1E51AF96F3500C40535 /* DDTTYLogger.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DDTTYLogger.m; path = ../../CocoaHTTPServer/Vendor/CocoaLumberjack/DDTTYLogger.m; sourceTree = "<group>"; };
 		7242E1EB1AF96FFD00C40535 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		7242E1ED1AF9703000C40535 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		7242E1EF1AFA879700C40535 /* HTTPCaesuraResponse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HTTPCaesuraResponse.m; sourceTree = "<group>"; };
+		7242E1F11AFA87C200C40535 /* HTTPCaesuraResponse.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = HTTPCaesuraResponse.h; sourceTree = "<group>"; };
+		7242E1F21AFBE18B00C40535 /* MyHTTPConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyHTTPConnection.h; sourceTree = "<group>"; };
+		7242E1F31AFBE18B00C40535 /* MyHTTPConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyHTTPConnection.m; sourceTree = "<group>"; };
 		DD4F7C0413C30F9F00825C6E /* Popup.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Popup.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD4F7C0813C30F9F00825C6E /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		DD4F7C0B13C30F9F00825C6E /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -187,8 +193,12 @@
 		7242E1BA1AF96D2E00C40535 /* Server */ = {
 			isa = PBXGroup;
 			children = (
+				7242E1F21AFBE18B00C40535 /* MyHTTPConnection.h */,
+				7242E1F31AFBE18B00C40535 /* MyHTTPConnection.m */,
 				7242E1BB1AF96D5400C40535 /* Connection.h */,
 				7242E1BC1AF96D8200C40535 /* Connection.m */,
+				7242E1EF1AFA879700C40535 /* HTTPCaesuraResponse.m */,
+				7242E1F11AFA87C200C40535 /* HTTPCaesuraResponse.h */,
 			);
 			name = Server;
 			sourceTree = "<group>";
@@ -328,7 +338,7 @@
 		DD4F7BFB13C30F9F00825C6E /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0610;
+				LastUpgradeCheck = 0630;
 			};
 			buildConfigurationList = DD4F7BFE13C30F9F00825C6E /* Build configuration list for PBXProject "Popup" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -389,11 +399,13 @@
 				7242E1E61AF96F3500C40535 /* DDAbstractDatabaseLogger.m in Sources */,
 				7242E1BD1AF96D8200C40535 /* Connection.m in Sources */,
 				7242E1B71AF9688500C40535 /* HTTPMessage.m in Sources */,
+				7242E1F41AFBE18B00C40535 /* MyHTTPConnection.m in Sources */,
 				7242E1D91AF96EEA00C40535 /* HTTPErrorResponse.m in Sources */,
 				7242E1DB1AF96EEA00C40535 /* HTTPRedirectResponse.m in Sources */,
 				DD4F7C4713C3208500825C6E /* BackgroundView.m in Sources */,
 				7242E1DA1AF96EEA00C40535 /* HTTPFileResponse.m in Sources */,
 				7242E1C01AF96E6800C40535 /* GCDAsyncSocket.m in Sources */,
+				7242E1F01AFA879700C40535 /* HTTPCaesuraResponse.m in Sources */,
 				7242E1B51AF9688500C40535 /* HTTPAuthenticationRequest.m in Sources */,
 				7242E1D61AF96EEA00C40535 /* HTTPAsyncFileResponse.m in Sources */,
 			);
@@ -430,6 +442,7 @@
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -466,6 +479,7 @@
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_MISSING_PROTOTYPES = YES;
