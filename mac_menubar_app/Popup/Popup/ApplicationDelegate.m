@@ -44,17 +44,29 @@ void *kContextActivePanel = &kContextActivePanel;
     
     httpServer = [[HTTPServer alloc] init];
     //[httpServer setInterface:@"localhost"];
-    
-    //[httpServer setPort:12345]; // TODO: use zeroconf
     [httpServer setConnectionClass:[Connection class]];
     
-    NSError *error = nil;
-    if(![httpServer start:&error])
-    {
-        NSLog(@"Error starting HTTP Server: %@", error);
+    
+    NSMutableArray* possiblePorts = [[NSMutableArray alloc] init];
+    for( int port = 54620; port < 54626; port++ ){
+        [possiblePorts addObject:[NSNumber numberWithInt:port]];
     }
-    else{
-        NSLog(@"port %i", [httpServer listeningPort]);
+    
+    bool connected = false;
+    while ( !connected && possiblePorts.count > 0 ) {
+        NSNumber * port = [possiblePorts objectAtIndex:0];
+        
+        [httpServer setPort:[port intValue]];
+        [possiblePorts removeObjectAtIndex:0];
+
+        NSError *error = nil;
+        if(![httpServer start:&error]) {
+            NSLog(@"Error starting HTTP Server: %@", error);
+        }
+        else{
+            NSLog(@"port %i", [httpServer listeningPort]);
+            connected = true;
+        }
     }
 
 }

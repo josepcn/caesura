@@ -167,15 +167,59 @@
 
 	// pull server request
 	(function(){
-		var port = "55198"
-		var xhr = new XMLHttpRequest()
-		xhr.open("GET", "http://127.0.0.1:" + port + "/query/", true)
-		xhr.onreadystatechange = function() {
-		  if (xhr.readyState == 4) {
-		  	alert("got response from menu bar app")
-		  }
+		var possiblePorts = []
+
+		function connect(){
+			for( var port = 54620; port < 54626; port++ ){
+				possiblePorts.push(port)
+			}
+			connectWithFirstPort()
 		}
-		xhr.send();
+
+		function connectWithFirstPort(){
+			if( possiblePorts.length  > 0 ){
+				var port = possiblePorts.shift().toString()
+
+				console.log("trying with: " + port )
+				var xhr = new XMLHttpRequest()
+				xhr.timeout = 300 //ms
+				xhr.open("GET", "http://127.0.0.1:" + port + "/query/", true)
+				xhr.onreadystatechange = function() {
+				  if (xhr.readyState === 4) {
+				  	if (xhr.status === 200) {
+				  		//alert("got response from menu bar app")
+				  		var resp = JSON.parse(xhr.responseText)
+				  		if( resp.switchAudio == "true" ){
+				  			//alert("do not switch")
+				  		}
+				  	}
+				  }
+				}
+				xhr.onerror= function(e) {
+        			//alert("Error fetching ");
+        			connectWithFirstPort()
+    			};
+				xhr.ontimeout = function(){
+					connectWithFirstPort()
+				}
+				xhr.send()
+			}
+		}
+
+
+		function setUpAlarm(){
+			var period = 0.008
+ 			chrome.alarms.create("checkServer", {
+       			delayInMinutes: 0.1, periodInMinutes: period});
+
+ 			chrome.alarms.onAlarm.addListener(function( alarm ) {
+		 		console.log("Got an alarm!", alarm);
+			});
+ 		}
+
+		setUpAlarm()
+		//connect()
+		
 	})();
 
 
