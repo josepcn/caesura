@@ -165,60 +165,9 @@
 	});
 
 
-	// pull server request
+	// connect to native app
 	(function(){
-		var possiblePorts = []
-
-		function connect(){
-			for( var port = 54620; port < 54626; port++ ){
-				possiblePorts.push(port)
-			}
-			connectWithFirstPort()
-		}
-
-		function connectWithFirstPort(){
-			if( possiblePorts.length  > 0 ){
-				var port = possiblePorts.shift().toString()
-
-				console.log("trying with: " + port )
-				var xhr = new XMLHttpRequest()
-				xhr.timeout = 300 //ms
-				xhr.open("GET", "http://127.0.0.1:" + port + "/query/", true)
-				xhr.onreadystatechange = function() {
-				  if (xhr.readyState === 4) {
-				  	if (xhr.status === 200) {
-				  		//alert("got response from menu bar app")
-				  		var resp = JSON.parse(xhr.responseText)
-				  		if( resp.switchAudio == "true" ){
-				  			//alert("do not switch")
-				  		}
-				  	}
-				  }
-				}
-				xhr.onerror= function(e) {
-        			//alert("Error fetching ");
-        			connectWithFirstPort()
-    			};
-				xhr.ontimeout = function(){
-					connectWithFirstPort()
-				}
-				xhr.send()
-			}
-		}
-
-
-		function setUpAlarm(){
-			var period = 0.008
- 			chrome.alarms.create("checkServer", {
-       			delayInMinutes: 0.1, periodInMinutes: period});
-
- 			chrome.alarms.onAlarm.addListener(function( alarm ) {
-		 		console.log("Got an alarm!", alarm);
-			});
- 		}
-
-		setUpAlarm()
-		//connect()
+		
 		
 	})();
 
@@ -227,75 +176,7 @@
 
 })(window);
 
-/*
 
-var lastTabPausedStorageKeyName = 'lastPauseTabId'
-var global_NumResponses = 0
-var global_NumTabsPlaying = 0
-var global_PortByTabID = {}
-
-
-function responseReceived( tabID, numTabs, port, msg ){
-	global_NumResponses = global_NumResponses + 1
-
-	if( msg ){
-		if( msg.isPlaying ){
-			port.postMessage({action: pauseMusicMessageName})
-			global_NumTabsPlaying = global_NumTabsPlaying + 1
-			var obj = {}
-			obj[lastTabPausedStorageKeyName] = tabID
-			chrome.storage.local.set(obj)
-		}
-	}
-
-	if( global_NumResponses === numTabs ){
-		// last response
-		if( global_NumTabsPlaying == 0 ){
-			chrome.storage.local.get(lastTabPausedStorageKeyName, function(result){
-				if( lastTabPausedStorageKeyName in result ){
-					var lastPauseTabId = result[lastTabPausedStorageKeyName]
-					global_PortByTabID[lastPauseTabId].postMessage({action: playMusicMessageName});
-				}
-			})	
-		}
-	}
-
-}
-function communicateWithTab( tabID, numTabs ){
-	var port = chrome.tabs.connect(tabID)
-
-	port.onMessage.addListener( function(msg) {
-    	responseReceived( tabID, numTabs, port, msg )
-	})
-	port.onDisconnect.addListener(function() { // tabs that are not connected call disconnect
-    	responseReceived( tabID, numTabs, port, null )
-	})
-
-	global_PortByTabID[tabID] = port
-	port.postMessage({action: notifyIsPlayingMessageName});
-}
-
-function toogleAudioOnTabs(tabs){
-	
-	global_NumResponses = 0
-	global_NumTabsPlaying = 0
-	global_PortByTabID = {}
-
-	for (var i = 0; i < tabs.length; i++) {
-		communicateWithTab(tabs[i].id, tabs.length);
-	}        
-    
-
-}
-
-
-chrome.commands.onCommand.addListener(function(command) {
-	if (command == "toggle-audio-playback") {
-		chrome.tabs.query({}, toogleAudioOnTabs)
-    }
-})
-
-*/
 
 
 
