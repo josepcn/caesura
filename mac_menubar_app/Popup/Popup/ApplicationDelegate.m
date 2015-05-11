@@ -1,10 +1,5 @@
 #import "ApplicationDelegate.h"
-#import "Connection.h"
-#import "DDLog.h"
-#import "DDTTYLogger.h"
-#import "MyHTTPConnection.h"
 
-static const int ddLogLevel = LOG_LEVEL_VERBOSE;
 
 @implementation ApplicationDelegate
 
@@ -39,6 +34,7 @@ void *kContextActivePanel = &kContextActivePanel;
     // Install icon into the menu bar
     self.menubarController = [[MenubarController alloc] init];
     
+    /*
     // start http server
     [DDLog addLogger:[DDTTYLogger sharedInstance]];
     
@@ -68,6 +64,9 @@ void *kContextActivePanel = &kContextActivePanel;
             connected = true;
         }
     }
+     */
+    
+    
 
 }
 
