@@ -11,7 +11,7 @@
 		7242E1EE1AF9703000C40535 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7242E1ED1AF9703000C40535 /* Security.framework */; };
 		DD4F7C0913C30F9F00825C6E /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD4F7C0813C30F9F00825C6E /* Cocoa.framework */; };
 		DD4F7C1513C30F9F00825C6E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C1413C30F9F00825C6E /* main.m */; };
-		DD4F7C1C13C30F9F00825C6E /* ApplicationDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.m */; };
+		DD4F7C1C13C30F9F00825C6E /* ApplicationDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.mm */; };
 		DD4F7C1F13C30F9F00825C6E /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = DD4F7C1D13C30F9F00825C6E /* MainMenu.xib */; };
 		DD4F7C3813C317A500825C6E /* MenubarController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C3713C317A500825C6E /* MenubarController.m */; };
 		DD4F7C3C13C3180800825C6E /* StatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F7C3B13C3180800825C6E /* StatusItemView.m */; };
@@ -37,7 +37,7 @@
 		DD4F7C1413C30F9F00825C6E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		DD4F7C1613C30F9F00825C6E /* Popup-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Popup-Prefix.pch"; sourceTree = "<group>"; };
 		DD4F7C1A13C30F9F00825C6E /* ApplicationDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationDelegate.h; sourceTree = "<group>"; };
-		DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ApplicationDelegate.m; sourceTree = "<group>"; };
+		DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; path = ApplicationDelegate.mm; sourceTree = "<group>"; };
 		DD4F7C1E13C30F9F00825C6E /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		DD4F7C3613C317A500825C6E /* MenubarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenubarController.h; sourceTree = "<group>"; };
 		DD4F7C3713C317A500825C6E /* MenubarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenubarController.m; sourceTree = "<group>"; };
@@ -126,7 +126,7 @@
 			isa = PBXGroup;
 			children = (
 				DD4F7C1A13C30F9F00825C6E /* ApplicationDelegate.h */,
-				DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.m */,
+				DD4F7C1B13C30F9F00825C6E /* ApplicationDelegate.mm */,
 				DD4F7C3613C317A500825C6E /* MenubarController.h */,
 				DD4F7C3713C317A500825C6E /* MenubarController.m */,
 				DD4F7C3D13C318D600825C6E /* PanelController.h */,
@@ -244,7 +244,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DD4F7C1513C30F9F00825C6E /* main.m in Sources */,
-				DD4F7C1C13C30F9F00825C6E /* ApplicationDelegate.m in Sources */,
+				DD4F7C1C13C30F9F00825C6E /* ApplicationDelegate.mm in Sources */,
 				DD4F7C3813C317A500825C6E /* MenubarController.m in Sources */,
 				DD4F7C3C13C3180800825C6E /* StatusItemView.m in Sources */,
 				DD4F7C3F13C318D600825C6E /* PanelController.m in Sources */,

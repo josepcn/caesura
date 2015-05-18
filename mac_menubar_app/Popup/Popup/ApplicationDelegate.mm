@@ -66,7 +66,45 @@ void *kContextActivePanel = &kContextActivePanel;
     }
      */
     
+    [self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
     
+    
+
+}
+
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdio>
+
+-(void) loopOnStdin
+{
+    const int len = 1024;
+    char buffer[len];
+    
+    while (fread(buffer, 4, 1, stdin)) {
+        int32_t numBytesMsg = 0;
+        memcpy(&numBytesMsg, buffer, 4);
+        
+        char msgBuff[numBytesMsg];
+        if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
+            NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
+            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            
+            /*
+            NSAlert *alert = [[NSAlert alloc] init];
+            [alert setMessageText:newStr];
+            [alert runModal];
+             */
+            
+        }
+        
+
+    }
+
+    
+     [NSApp terminate:self];
+
 
 }
 

@@ -167,6 +167,16 @@
 
 	// connect to native app
 	(function(){
+
+		var port = chrome.runtime.connectNative('com.caesura.menu_bar_controller');
+		port.onMessage.addListener(function(msg) {
+		  console.log("Received" + msg);
+		});
+		port.onDisconnect.addListener(function() {
+			console.log("Inside onDisconnected(): " + chrome.runtime.lastError.message);
+		  console.log("Disconnected");
+		});
+		port.postMessage({ text: "Hello, my_application" });
 		
 		
 	})();
