@@ -40,8 +40,8 @@ void *kContextActivePanel = &kContextActivePanel;
     self.menubarController = [[MenubarController alloc] init];
     
     
-    //[self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
-    [self loopOnStdin];
+    [self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
+    //[self loopOnStdin];
 }
 
 
