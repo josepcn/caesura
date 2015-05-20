@@ -45,6 +45,15 @@ void *kContextActivePanel = &kContextActivePanel;
 }
 
 
+-(void) showDebugAlert: (NSString *) text
+{
+    
+     NSAlert *alert = [[NSAlert alloc] init];
+     [alert setMessageText:text];
+     [alert runModal];
+    
+
+}
 
 -(NSString*) actOnCommand:(NSString *)command
 {
@@ -73,11 +82,6 @@ void *kContextActivePanel = &kContextActivePanel;
               << char(dataLen>>16)
               << char(dataLen>>24)
               << data << std::flush;
-    /*
-    NSAlert *alert = [[NSAlert alloc] init];
-    [alert setMessageText:txt];
-    [alert runModal];
-     */
 
 
 }
@@ -93,9 +97,7 @@ void *kContextActivePanel = &kContextActivePanel;
         char msgBuff[numBytesMsg];
         if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
             NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
-            //NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
-            //NSData * data2 = [newStr dataUsingEncoding:NSUTF8StringEncoding];
             NSError *error;
             NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
                                                                          options:kNilOptions
@@ -103,25 +105,13 @@ void *kContextActivePanel = &kContextActivePanel;
             if( !error ){
                 NSString*  cmdStr = jsonResponse[@"cmd"];
                 NSString* respStr = [self actOnCommand:cmdStr];
-                
                 [self sendResponse:respStr];
-
             }
-            /*
-            NSAlert *alert = [[NSAlert alloc] init];
-            [alert setMessageText:newStr];
-            [alert runModal];
-             */
-            
         }
-        //usleep(100);
-
     }
 
-    
-     [NSApp terminate:self];
-
-
+    // terminate if we cannot read from stdin (extension was closed)
+    [NSApp terminate:self];
 }
 
 - (NSApplicationTerminateReply)applicationShouldTerminate:(NSApplication *)sender
