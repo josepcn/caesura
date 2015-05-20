@@ -13,6 +13,13 @@
       },
       "description": "Toggle audio playback",
       "global": true
+    },
+    "debug": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+9"
+      },
+      "description": "debug",
+      "global": false
     }
   },
 

@@ -66,7 +66,8 @@ void *kContextActivePanel = &kContextActivePanel;
     }
      */
     
-    [self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
+    //[self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
+    [self loopOnStdin];
     
     
 
@@ -76,7 +77,43 @@ void *kContextActivePanel = &kContextActivePanel;
 #include <fstream>
 #include <string>
 #include <cstdio>
+#include <ctime>
 
+-(NSString*) actOnCommand:(NSString *)command
+{
+    
+    NSString * actionStr = @"";
+    
+    if( [command isEqualToString:@"init"] ){
+        actionStr = @"ok";
+    }
+    else{
+        actionStr = @"uknown";
+    }
+    
+    NSString * responseStr = [NSString stringWithFormat:@"{\"action\":\"%@\"}", actionStr];
+    return responseStr;
+}
+
+-(void) sendResponse: (NSString*)txt
+{
+    NSData * nsdata = [txt dataUsingEncoding:NSUTF8StringEncoding];
+    char * data = (char*)[nsdata bytes];
+    int32_t dataLen = (int) [nsdata length];
+    
+    std::cout << char(dataLen>>0)
+              << char(dataLen>>8)
+              << char(dataLen>>16)
+              << char(dataLen>>24)
+              << data << std::flush;
+    /*
+    NSAlert *alert = [[NSAlert alloc] init];
+    [alert setMessageText:txt];
+    [alert runModal];
+     */
+
+
+}
 -(void) loopOnStdin
 {
     const int len = 1024;
@@ -89,8 +126,20 @@ void *kContextActivePanel = &kContextActivePanel;
         char msgBuff[numBytesMsg];
         if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
             NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
-            NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+            //NSString* newStr = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
             
+            //NSData * data2 = [newStr dataUsingEncoding:NSUTF8StringEncoding];
+            NSError *error;
+            NSDictionary *jsonResponse = [NSJSONSerialization JSONObjectWithData:data
+                                                                         options:kNilOptions
+                                                                           error:&error];
+            if( !error ){
+                NSString*  cmdStr = jsonResponse[@"cmd"];
+                NSString* respStr = [self actOnCommand:cmdStr];
+                
+                [self sendResponse:respStr];
+
+            }
             /*
             NSAlert *alert = [[NSAlert alloc] init];
             [alert setMessageText:newStr];
@@ -98,7 +147,7 @@ void *kContextActivePanel = &kContextActivePanel;
              */
             
         }
-        
+        //usleep(100);
 
     }
 

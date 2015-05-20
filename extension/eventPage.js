@@ -167,17 +167,52 @@
 
 	// connect to native app
 	(function(){
-
-		var port = chrome.runtime.connectNative('com.caesura.menu_bar_controller');
-		port.onMessage.addListener(function(msg) {
-		  console.log("Received" + msg);
-		});
-		port.onDisconnect.addListener(function() {
-			console.log("Inside onDisconnected(): " + chrome.runtime.lastError.message);
-		  console.log("Disconnected");
-		});
-		port.postMessage({ text: "Hello, my_application" });
 		
+		function parseMsgFromNativeHost(msg){
+			if( msg.action != "" ){
+				//console.log("Action from native host: " + msg.action)
+				if( msg.action == "ok"){
+					// nothing to be done
+				}
+				else if( msg.action == "pause"){
+				}
+				else if( msg.action == "play"){
+				}
+				else if( msg.action == "uknown"){
+					console.log("Native host says uknown command")	
+				}
+				else{
+					console.log("Error: received uknown action")	
+				}
+			}
+			else{
+				console.log("Error: message has no action")	
+			}
+
+		}
+
+		var port = chrome.runtime.connectNative('com.caesura.menu_bar_controller')
+		port.onMessage.addListener(function(msg) {
+			//console.log("Received" + msg)
+			parseMsgFromNativeHost(msg)
+		})
+		port.onDisconnect.addListener(function() {
+			console.log("Inside onDisconnected(): " + chrome.runtime.lastError.message)
+		  	console.log("Disconnected")
+		});
+		port.postMessage({ cmd: "init" })
+		
+
+		chrome.commands.onCommand.addListener(function(command) {
+			if (command == "debug") {
+				console.log("debug")
+				port.postMessage({ cmd: "debug" })
+		    }
+		})
+
+
+
+
 		
 	})();
 
