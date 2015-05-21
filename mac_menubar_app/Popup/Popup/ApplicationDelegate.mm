@@ -5,6 +5,7 @@
 #include <string>
 #include <cstdio>
 #include <ctime>
+#include <string>
 
 @implementation ApplicationDelegate
 
@@ -39,7 +40,7 @@ void *kContextActivePanel = &kContextActivePanel;
     // Install icon into the menu bar
     self.menubarController = [[MenubarController alloc] init];
     
-    
+     //_setmode( fileno( stdout ),  _O_BINARY );
     [self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
     //[self loopOnStdin];
 }
@@ -55,6 +56,12 @@ void *kContextActivePanel = &kContextActivePanel;
 
 }
 
+-(NSString*) buildActionResponseStr: (NSString *)actionStr
+{
+    return [NSString stringWithFormat:@"{\"action\":\"%@\"}", actionStr];
+    
+}
+
 -(NSString*) actOnCommand:(NSString *)command
 {
     
@@ -63,39 +70,88 @@ void *kContextActivePanel = &kContextActivePanel;
     if( [command isEqualToString:@"init"] ){
         actionStr = @"ok";
     }
+    else if( [command isEqualToString:@"debug"] ){
+        actionStr = @"debug";
+    }
     else{
         actionStr = @"uknown";
     }
     
-    NSString * responseStr = [NSString stringWithFormat:@"{\"action\":\"%@\"}", actionStr];
-    return responseStr;
+    return [self buildActionResponseStr:actionStr];
 }
+
 
 -(void) sendResponse: (NSString*)txt
 {
-    NSData * nsdata = [txt dataUsingEncoding:NSUTF8StringEncoding];
-    char * data = (char*)[nsdata bytes];
-    int32_t dataLen = (int) [nsdata length];
+    //NSLog( @"sending response" );
+    //@synchronized(self){
     
-    std::cout << char(dataLen>>0)
-              << char(dataLen>>8)
-              << char(dataLen>>16)
-              << char(dataLen>>24)
-              << data << std::flush;
+        //NSData * nsdata = [txt dataUsingEncoding:NSUTF8StringEncoding];
+    const char * utfBuff = [txt UTF8String];
+    int32_t dataLen = (int32_t)strlen(utfBuff);
+    
+    //NSData * nsdata = [[NSData alloc] initWithBytes:utfBuff length:];
+    
+       // Byte * data = (Byte*)[nsdata bytes];
+        //int32_t dataLen = (int32_t) [nsdata length];
+    
+    
+        //NSLog( @"r: len: %i, data %@", dataLen, nsdata );
 
+    std::cout << Byte(dataLen>>0)
+    << Byte(dataLen>>8)
+    << Byte(dataLen>>16)
+    << Byte(dataLen>>24)
+    << utfBuff << std::flush;
+    
+//        std::string s("{\"action\":\"ok\"}");
+//        dataLen = (int32_t)s.length();
+//        std::cout << Byte(dataLen>>0)
+//        << Byte(dataLen>>8)
+//        << Byte(dataLen>>16)
+//        << Byte(dataLen>>24)
+//        << s.c_str() << std::flush;
 
+        //<< data; // << std::flush;
+        //sleep(1);
+    NSLog( @"after sleep" );
+    //fflush(stdout);
+        //memcpy((&msg)+4, data, dataLen );
+        //std::cout << msgLen << data << std::flush;
+    
+        
+        /*
+        std::cout << char(dataLen>>0)
+        << char(dataLen>>8)
+        << char(dataLen>>16)
+        << char(dataLen>>24)
+        << data << std::flush;
+         */
+    //}
 }
+
+
 -(void) loopOnStdin
 {
-    const int len = 1024;
-    char buffer[len];
+    Byte buffer[4];
     
     while (fread(buffer, 4, 1, stdin)) {
+        
+        //NSLog( @"got data on stdin" );
+        
+        //int32_t numBytesMsg = 0;
+        //memcpy(&numBytesMsg, buffer, 4);
         int32_t numBytesMsg = 0;
-        memcpy(&numBytesMsg, buffer, 4);
+        
+        numBytesMsg = (numBytesMsg << 8) + buffer[3];
+        numBytesMsg = (numBytesMsg << 8) + buffer[2];
+        numBytesMsg = (numBytesMsg << 8) + buffer[1];
+        numBytesMsg = (numBytesMsg << 8) + buffer[0];
         
         char msgBuff[numBytesMsg];
         if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
+            NSLog( @"message read" );
+            
             NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
             
             NSError *error;
@@ -103,12 +159,17 @@ void *kContextActivePanel = &kContextActivePanel;
                                                                          options:kNilOptions
                                                                            error:&error];
             if( !error ){
+                //NSLog( @"json ok" );
+
                 NSString*  cmdStr = jsonResponse[@"cmd"];
                 NSString* respStr = [self actOnCommand:cmdStr];
                 [self sendResponse:respStr];
+                
             }
         }
     }
+
+    NSLog( @"terminating" );
 
     // terminate if we cannot read from stdin (extension was closed)
     [NSApp terminate:self];
@@ -127,6 +188,8 @@ void *kContextActivePanel = &kContextActivePanel;
 {
     //self.menubarController.hasActiveIcon = !self.menubarController.hasActiveIcon;
     //self.panelController.hasActivePanel = self.menubarController.hasActiveIcon;
+    
+    [self sendResponse:[self buildActionResponseStr:@"toogle"]];
 }
 
 #pragma mark - Public accessors

@@ -156,11 +156,14 @@
 
 	}
 
+	function toogleCommandReceived(){
+		chrome.tabs.query({}, toogleAudioOnTabs)
+	}
 
 	// Install key command (from keys)
 	chrome.commands.onCommand.addListener(function(command) {
 		if (command == "toggle-audio-playback") {
-			chrome.tabs.query({}, toogleAudioOnTabs)
+			toogleCommandReceived()
 	    }
 	});
 
@@ -172,11 +175,19 @@
 			if( msg.action != "" ){
 				//console.log("Action from native host: " + msg.action)
 				if( msg.action == "ok"){
-					// nothing to be done
+					console.log("ok action received")
+					//port.postMessage({ cmd: "debug" })
 				}
 				else if( msg.action == "pause"){
 				}
 				else if( msg.action == "play"){
+				}
+				else if( msg.action == "toogle"){
+					toogleCommandReceived()
+				}
+				else if( msg.action == "debug"){
+					console.log("debug action received")
+					//port.postMessage({ cmd: "debug" })
 				}
 				else if( msg.action == "uknown"){
 					console.log("Native host says uknown command")	
