@@ -176,7 +176,6 @@
 				//console.log("Action from native host: " + msg.action)
 				if( msg.action == "ok"){
 					console.log("ok action received")
-					//port.postMessage({ cmd: "debug" })
 				}
 				else if( msg.action == "pause"){
 				}
