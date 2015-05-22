@@ -83,51 +83,15 @@ void *kContextActivePanel = &kContextActivePanel;
 
 -(void) sendResponse: (NSString*)txt
 {
-    //NSLog( @"sending response" );
-    //@synchronized(self){
     
-        //NSData * nsdata = [txt dataUsingEncoding:NSUTF8StringEncoding];
     const char * utfBuff = [txt UTF8String];
     int32_t dataLen = (int32_t)strlen(utfBuff);
     
-    //NSData * nsdata = [[NSData alloc] initWithBytes:utfBuff length:];
-    
-       // Byte * data = (Byte*)[nsdata bytes];
-        //int32_t dataLen = (int32_t) [nsdata length];
-    
-    
-        //NSLog( @"r: len: %i, data %@", dataLen, nsdata );
-
     std::cout << Byte(dataLen>>0)
     << Byte(dataLen>>8)
     << Byte(dataLen>>16)
     << Byte(dataLen>>24)
     << utfBuff << std::flush;
-    
-//        std::string s("{\"action\":\"ok\"}");
-//        dataLen = (int32_t)s.length();
-//        std::cout << Byte(dataLen>>0)
-//        << Byte(dataLen>>8)
-//        << Byte(dataLen>>16)
-//        << Byte(dataLen>>24)
-//        << s.c_str() << std::flush;
-
-        //<< data; // << std::flush;
-        //sleep(1);
-    NSLog( @"after sleep" );
-    //fflush(stdout);
-        //memcpy((&msg)+4, data, dataLen );
-        //std::cout << msgLen << data << std::flush;
-    
-        
-        /*
-        std::cout << char(dataLen>>0)
-        << char(dataLen>>8)
-        << char(dataLen>>16)
-        << char(dataLen>>24)
-        << data << std::flush;
-         */
-    //}
 }
 
 
@@ -139,8 +103,6 @@ void *kContextActivePanel = &kContextActivePanel;
         
         //NSLog( @"got data on stdin" );
         
-        //int32_t numBytesMsg = 0;
-        //memcpy(&numBytesMsg, buffer, 4);
         int32_t numBytesMsg = 0;
         
         numBytesMsg = (numBytesMsg << 8) + buffer[3];
@@ -149,9 +111,7 @@ void *kContextActivePanel = &kContextActivePanel;
         numBytesMsg = (numBytesMsg << 8) + buffer[0];
         
         char msgBuff[numBytesMsg];
-        if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
-            NSLog( @"message read" );
-            
+        if( fread(msgBuff, numBytesMsg, 1, stdin) ) {            
             NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
             
             NSError *error;
@@ -159,17 +119,14 @@ void *kContextActivePanel = &kContextActivePanel;
                                                                          options:kNilOptions
                                                                            error:&error];
             if( !error ){
-                //NSLog( @"json ok" );
-
                 NSString*  cmdStr = jsonResponse[@"cmd"];
                 NSString* respStr = [self actOnCommand:cmdStr];
                 [self sendResponse:respStr];
-                
             }
         }
     }
 
-    NSLog( @"terminating" );
+    //NSLog( @"terminating" );
 
     // terminate if we cannot read from stdin (extension was closed)
     [NSApp terminate:self];
