@@ -39,10 +39,8 @@ void *kContextActivePanel = &kContextActivePanel;
 {
     // Install icon into the menu bar
     self.menubarController = [[MenubarController alloc] init];
-    
-     //_setmode( fileno( stdout ),  _O_BINARY );
+
     [self performSelectorInBackground:@selector(loopOnStdin) withObject:nil];
-    //[self loopOnStdin];
 }
 
 
@@ -111,7 +109,7 @@ void *kContextActivePanel = &kContextActivePanel;
         numBytesMsg = (numBytesMsg << 8) + buffer[0];
         
         char msgBuff[numBytesMsg];
-        if( fread(msgBuff, numBytesMsg, 1, stdin) ) {            
+        if( fread(msgBuff, numBytesMsg, 1, stdin) ) {
             NSData * data = [[NSData alloc] initWithBytes:msgBuff length:numBytesMsg];
             
             NSError *error;
