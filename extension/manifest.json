@@ -5,6 +5,7 @@
   "short_name": "caesura",
   "description": "Pause and resume streaming music with a keyboard shortcut",
   "version": "0.1.3",
+  "content_security_policy": "script-src 'self' https://ssl.google-analytics.com; object-src 'self'",
 
   "commands": {
     "toggle-audio-playback": {
@@ -31,7 +32,7 @@
   ],
 
   "icons": { 
-            "128": "icons/icon_key_128.png" 
+    "128": "icons/icon_key_128.png" 
   },
 
   "background": {

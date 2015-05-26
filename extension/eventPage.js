@@ -1,5 +1,10 @@
 
 
+var _gaq = _gaq || [];
+_gaq.push(['_setAccount', 'UA-63306469-1']);
+_gaq.push(['_trackPageview']);
+
+
 // Config loader
 (function(w){
 
@@ -163,6 +168,7 @@
 	// Install key command (from keys)
 	chrome.commands.onCommand.addListener(function(command) {
 		if (command == "toggle-audio-playback") {
+			_gaq.push(['_trackEvent', 'Commands', 'Toogle', 'HotKey'])
 			toogleCommandReceived()
 	    }
 	});
@@ -182,6 +188,7 @@
 				else if( msg.action == "play"){
 				}
 				else if( msg.action == "toogle"){
+					_gaq.push(['_trackEvent', 'Commands', 'Toogle', 'NativeApp'])
 					toogleCommandReceived()
 				}
 				else if( msg.action == "debug"){
@@ -219,11 +226,14 @@
 				port.postMessage({ cmd: "debug" })
 		    }
 		})
-
-
-
-
 		
+	})();
+
+	// analytics
+	(function() {
+		var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+		ga.src = 'https://ssl.google-analytics.com/ga.js';
+		var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
 	})();
 
 
