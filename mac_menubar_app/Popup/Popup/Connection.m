@@ -2,6 +2,7 @@
 #import "HTTPMessage.h"
 #import "HTTPLogging.h"
 #import "HTTPCaesuraResponse.h"
+#import "HTTPDataResponse.h"
 
 // Log levels : off, error, warn, info, verbose
 // Other flags: trace
@@ -24,13 +25,18 @@ static const int httpLogLevel = HTTP_LOG_LEVEL_VERBOSE | HTTP_LOG_FLAG_TRACE;
     if ([method isEqualToString:@"GET"] && [path isEqualToString:@"/query/"])
     {
         //HTTPLogVerbose(@"%@[%p]: postContentLength: %qu", THIS_FILE, self, requestContentLength);
-        
+        /*
         HTTPLogVerbose(@"Have been polled");
         
-        return [[HTTPCaesuraResponse alloc] init];
+        return [[HTTPCaesuraResponse alloc] initWithStatus:(200)];
+         */
+        
+        NSData * response = [@"{\"switchAudio\":\"false\"}" dataUsingEncoding:NSUTF8StringEncoding];
+
+        return [[HTTPDataResponse alloc] initWithData:response];
     }
     
-    return [super httpResponseForMethod:method URI:path];
+    return [[HTTPCaesuraResponse alloc] initWithStatus:(404)];
 }
 
 
