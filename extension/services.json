@@ -50,8 +50,18 @@
 		"type" : "class_change_selector_att",
 		"selectorAtt" : "[data-id='play-pause']",
 		"classNames" : {
-			"paused" : "flat-button",
-			"playing" : "flat-button playing"
+			"paused" : "x-scope paper-icon-button-0",
+			"playing" : "x-scope paper-icon-button-0 playing"
+		}
+	},
+	{
+		"name" : "amazonmusic",
+		"url" : "amazon.com/gp/dmusic/cloudplayer",
+		"type" : "class_change_selector_att",
+		"selectorAtt" : "[aria-label='Play and pause songs']",
+		"classNames" : {
+			"paused" : "button playerIcon playButton playerIconPlay",
+			"playing" : "button playerIcon playButton playerIconPause"
 		}
 	}
 ]

@@ -9,8 +9,9 @@ Supported services:
 - Soundcloud
 - Rdio
 - Deezer
-- Google Pay Music
+- Google Play Music
 - BBC Radio 1 (pop-up window)
 - Mixcloud
+- Amazon Music
 
 
